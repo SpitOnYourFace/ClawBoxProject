@@ -1,0 +1,25 @@
+# Compiled class files
+*.class
+
+# H2 Database files
+DB/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build output
+out/
+bin/
+target/
