@@ -76,38 +76,60 @@ Both scripts will:
 The application uses an **H2 embedded database** that auto-initializes on first run. The schema consists of 5 tables:
 
 ```
-┌────────────┐     ┌──────────────┐     ┌─────────────┐
-│ KATEGORII  │     │  KOMPONENTI  │     │ DOSTAVCHICI │
-├────────────┤     ├──────────────┤     ├─────────────┤
-│ ID (PK)    │◄────│ IDKATEGORIYA │     │ ID (PK)     │
-│ NAME       │     │ IDDOSTAVCHIK │────►│ NAME        │
-└────────────┘     │ ID (PK)      │     │ ADRES       │
-                   │ NAME         │     └─────────────┘
-                   │ OPIS         │
-                   │ KOL          │
-                   │ CENA         │
-                   └──────┬───────┘
-                          │
-                   ┌──────┴───────┐
-                   │   PORUCHKI   │
-                   ├──────────────┤
-                   │ ID (PK)      │
-                   │ IDKOMPONENT  │────► KOMPONENTI.ID
-                   │ IDKLIENT     │────► KLIENTI.ID
-                   │ KOL          │
-                   │ DATAPR       │
-                   │ DATAIZ       │
-                   └──────────────┘
-                          │
-                   ┌──────┴───────┐
-                   │   KLIENTI    │
-                   ├──────────────┤
-                   │ ID (PK)      │
-                   │ FNAME        │
-                   │ LNAME        │
-                   │ TELEFON      │
-                   └──────────────┘
+┌────────────┐                          ┌─────────────┐
+│ KATEGORII  │                          │ DOSTAVCHICI │
+├────────────┤                          ├─────────────┤
+│ ID (PK)    │                          │ ID (PK)     │
+│ NAME       │                          │ NAME        │
+└─────┬──────┘                          │ ADRES       │
+      │ 1                               └──────┬──────┘
+      │                                        │ 1
+      │ ┌──────────────────────────────────────┘
+      │ │
+      ▼ ▼
+┌──────────────────┐
+│   KOMPONENTI     │
+├──────────────────┤
+│ ID (PK)          │
+│ NAME             │
+│ IDKATEGORIYA (FK)│───► KATEGORII.ID
+│ IDDOSTAVCHIK (FK)│───► DOSTAVCHICI.ID
+│ OPIS             │
+│ KOL              │
+│ CENA             │
+└────────┬─────────┘
+         │ 1
+         │
+         │        ┌──────────────┐
+         │        │   KLIENTI    │
+         │        ├──────────────┤
+         │        │ ID (PK)      │
+         │        │ FNAME        │
+         │        │ LNAME        │
+         │        │ TELEFON      │
+         │        └───────┬──────┘
+         │                │ 1
+         │                │
+         ▼                ▼
+┌──────────────────────────────┐
+│          PORUCHKI            │
+├──────────────────────────────┤
+│ ID (PK)                     │
+│ IDKOMPONENT (FK)             │───► KOMPONENTI.ID
+│ IDKLIENT (FK)                │───► KLIENTI.ID
+│ KOL                          │
+│ DATAPR                       │
+│ DATAIZ                       │
+└──────────────────────────────┘
 ```
+
+**Foreign Key Relationships:**
+| Child Table | FK Column | References |
+|-------------|-----------|------------|
+| KOMPONENTI | IDKATEGORIYA | KATEGORII(ID) |
+| KOMPONENTI | IDDOSTAVCHIK | DOSTAVCHICI(ID) |
+| PORUCHKI | IDKOMPONENT | KOMPONENTI(ID) |
+| PORUCHKI | IDKLIENT | KLIENTI(ID) |
 
 **Initial seed data** is inserted automatically when the database is first created:
 - 3 categories: Nvidia Jetson Nano, 512GB Hard Disc, Cases for the box
