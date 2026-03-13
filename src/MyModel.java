@@ -7,7 +7,7 @@ public class MyModel extends AbstractTableModel {
     private static final long serialVersionUID = 1L;
     private int rowCount;
     private int columnCount;
-    private ArrayList<Object[]> data = new ArrayList<>();
+    private ArrayList<Object> data = new ArrayList<Object>();
     private String[] columnNames;
 
     public MyModel(ResultSet rs) throws Exception {
@@ -31,14 +31,13 @@ public class MyModel extends AbstractTableModel {
             data.add(row);
             rowCount++;
         }
-        fireTableStructureChanged();
     }
 
     public int getColumnCount() { return columnCount; }
     public int getRowCount() { return rowCount; }
 
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Object[] row = data.get(rowIndex);
+        Object[] row = (Object[]) data.get(rowIndex);
         return row[columnIndex];
     }
 
