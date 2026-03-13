@@ -729,11 +729,23 @@ public class ClawBoxFrame extends JFrame {
                         "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                if (kol <= 0) {
+                    JOptionPane.showMessageDialog(ClawBoxFrame.this,
+                        "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E\u0442\u043E \u0442\u0440\u044F\u0431\u0432\u0430 \u0434\u0430 \u0435 \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u043D\u043E!",
+                        "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 try {
                     cena = Double.parseDouble(tfCena.getText().trim());
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(ClawBoxFrame.this,
                         "\u0426\u0435\u043D\u0430\u0442\u0430 \u0442\u0440\u044F\u0431\u0432\u0430 \u0434\u0430 \u0435 \u0447\u0438\u0441\u043B\u043E!",
+                        "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if (cena <= 0) {
+                    JOptionPane.showMessageDialog(ClawBoxFrame.this,
+                        "\u0426\u0435\u043D\u0430\u0442\u0430 \u0442\u0440\u044F\u0431\u0432\u0430 \u0434\u0430 \u0435 \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u043D\u0430!",
                         "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
@@ -770,7 +782,7 @@ public class ClawBoxFrame extends JFrame {
                 refreshComboPorKomponent();
                 clearFormKomponenti();
             } catch (SQLException ex) {
-                if (ex.getMessage().contains("Referential integrity")) {
+                if ("23503".equals(ex.getSQLState())) {
                     JOptionPane.showMessageDialog(ClawBoxFrame.this,
                         "\u041D\u0435 \u043C\u043E\u0436\u0435 \u0434\u0430 \u0441\u0435 \u0438\u0437\u0442\u0440\u0438\u0435 - \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442\u044A\u0442 \u0441\u0435 \u0438\u0437\u043F\u043E\u043B\u0437\u0432\u0430 \u0432 \u043F\u043E\u0440\u044A\u0447\u043A\u0438!",
                         "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
@@ -797,11 +809,23 @@ public class ClawBoxFrame extends JFrame {
                         "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                if (kol <= 0) {
+                    JOptionPane.showMessageDialog(ClawBoxFrame.this,
+                        "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E\u0442\u043E \u0442\u0440\u044F\u0431\u0432\u0430 \u0434\u0430 \u0435 \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u043D\u043E!",
+                        "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 try {
                     cena = Double.parseDouble(tfCena.getText().trim());
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(ClawBoxFrame.this,
                         "\u0426\u0435\u043D\u0430\u0442\u0430 \u0442\u0440\u044F\u0431\u0432\u0430 \u0434\u0430 \u0435 \u0447\u0438\u0441\u043B\u043E!",
+                        "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if (cena <= 0) {
+                    JOptionPane.showMessageDialog(ClawBoxFrame.this,
+                        "\u0426\u0435\u043D\u0430\u0442\u0430 \u0442\u0440\u044F\u0431\u0432\u0430 \u0434\u0430 \u0435 \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u043D\u0430!",
                         "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
@@ -885,7 +909,7 @@ public class ClawBoxFrame extends JFrame {
                 refreshComboSpravkaKat();
                 clearFormKategorii();
             } catch (SQLException ex) {
-                if (ex.getMessage().contains("Referential integrity")) {
+                if ("23503".equals(ex.getSQLState())) {
                     JOptionPane.showMessageDialog(ClawBoxFrame.this,
                         "\u041D\u0435 \u043C\u043E\u0436\u0435 \u0434\u0430 \u0441\u0435 \u0438\u0437\u0442\u0440\u0438\u0435 - \u043A\u0430\u0442\u0435\u0433\u043E\u0440\u0438\u044F\u0442\u0430 \u0441\u0435 \u0438\u0437\u043F\u043E\u043B\u0437\u0432\u0430 \u043E\u0442 \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442\u0438!",
                         "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
@@ -969,7 +993,7 @@ public class ClawBoxFrame extends JFrame {
                 refreshComboSpravkaDost();
                 clearFormDostavchici();
             } catch (SQLException ex) {
-                if (ex.getMessage().contains("Referential integrity")) {
+                if ("23503".equals(ex.getSQLState())) {
                     JOptionPane.showMessageDialog(ClawBoxFrame.this,
                         "\u041D\u0435 \u043C\u043E\u0436\u0435 \u0434\u0430 \u0441\u0435 \u0438\u0437\u0442\u0440\u0438\u0435 - \u0434\u043E\u0441\u0442\u0430\u0432\u0447\u0438\u043A\u044A\u0442 \u0441\u0435 \u0438\u0437\u043F\u043E\u043B\u0437\u0432\u0430 \u043E\u0442 \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442\u0438!",
                         "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
@@ -1054,7 +1078,7 @@ public class ClawBoxFrame extends JFrame {
                 refreshComboPorKlient();
                 clearFormKlienti();
             } catch (SQLException ex) {
-                if (ex.getMessage().contains("Referential integrity")) {
+                if ("23503".equals(ex.getSQLState())) {
                     JOptionPane.showMessageDialog(ClawBoxFrame.this,
                         "\u041D\u0435 \u043C\u043E\u0436\u0435 \u0434\u0430 \u0441\u0435 \u0438\u0437\u0442\u0440\u0438\u0435 - \u043A\u043B\u0438\u0435\u043D\u0442\u044A\u0442 \u0438\u043C\u0430 \u043F\u043E\u0440\u044A\u0447\u043A\u0438!",
                         "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
@@ -1120,6 +1144,12 @@ public class ClawBoxFrame extends JFrame {
                         "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                if (kol <= 0) {
+                    JOptionPane.showMessageDialog(ClawBoxFrame.this,
+                        "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E\u0442\u043E \u0442\u0440\u044F\u0431\u0432\u0430 \u0434\u0430 \u0435 \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u043D\u043E!",
+                        "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 java.sql.Date dataPr;
                 java.sql.Date dataIz;
                 try {
@@ -1135,6 +1165,12 @@ public class ClawBoxFrame extends JFrame {
                 } catch (IllegalArgumentException ex) {
                     JOptionPane.showMessageDialog(ClawBoxFrame.this,
                         "\u0414\u0430\u0442\u0430 \u0438\u0437\u043F\u044A\u043B\u043D\u0435\u043D\u0430 \u0442\u0440\u044F\u0431\u0432\u0430 \u0434\u0430 \u0435 \u0432\u044A\u0432 \u0444\u043E\u0440\u043C\u0430\u0442 YYYY-MM-DD!",
+                        "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if (dataIz.before(dataPr)) {
+                    JOptionPane.showMessageDialog(ClawBoxFrame.this,
+                        "\u0414\u0430\u0442\u0430 \u0438\u0437\u043F\u044A\u043B\u043D\u0435\u043D\u0430 \u043D\u0435 \u043C\u043E\u0436\u0435 \u0434\u0430 \u0435 \u043F\u0440\u0435\u0434\u0438 \u0434\u0430\u0442\u0430 \u043F\u0440\u0438\u0435\u0442\u0430!",
                         "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
@@ -1186,6 +1222,12 @@ public class ClawBoxFrame extends JFrame {
                         "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                if (kol <= 0) {
+                    JOptionPane.showMessageDialog(ClawBoxFrame.this,
+                        "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E\u0442\u043E \u0442\u0440\u044F\u0431\u0432\u0430 \u0434\u0430 \u0435 \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u0435\u043B\u043D\u043E!",
+                        "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 java.sql.Date dataPr;
                 java.sql.Date dataIz;
                 try {
@@ -1201,6 +1243,12 @@ public class ClawBoxFrame extends JFrame {
                 } catch (IllegalArgumentException ex) {
                     JOptionPane.showMessageDialog(ClawBoxFrame.this,
                         "\u0414\u0430\u0442\u0430 \u0438\u0437\u043F\u044A\u043B\u043D\u0435\u043D\u0430 \u0442\u0440\u044F\u0431\u0432\u0430 \u0434\u0430 \u0435 \u0432\u044A\u0432 \u0444\u043E\u0440\u043C\u0430\u0442 YYYY-MM-DD!",
+                        "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if (dataIz.before(dataPr)) {
+                    JOptionPane.showMessageDialog(ClawBoxFrame.this,
+                        "\u0414\u0430\u0442\u0430 \u0438\u0437\u043F\u044A\u043B\u043D\u0435\u043D\u0430 \u043D\u0435 \u043C\u043E\u0436\u0435 \u0434\u0430 \u0435 \u043F\u0440\u0435\u0434\u0438 \u0434\u0430\u0442\u0430 \u043F\u0440\u0438\u0435\u0442\u0430!",
                         "\u0413\u0440\u0435\u0448\u043A\u0430", JOptionPane.ERROR_MESSAGE);
                     return;
                 }

@@ -12,21 +12,24 @@ public class MyDBConnection {
             Class.forName("org.h2.Driver");
             conn = DriverManager.getConnection("jdbc:h2:./DB/clawbox", "sa", "");
             if (!initialized) {
-                initDB();
-                initialized = true;
+                try {
+                    initDB();
+                    initialized = true;
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("Database initialization failed", e);
+                }
             }
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException("H2 driver not found", e);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Database connection failed", e);
         }
         return conn;
     }
 
-    static void initDB() {
-        try {
-            Statement st = conn.createStatement();
-
+    static void initDB() throws SQLException {
+        try (Statement st = conn.createStatement()) {
             st.executeUpdate("CREATE TABLE IF NOT EXISTS KATEGORII ("
                 + "ID IDENTITY PRIMARY KEY, "
                 + "NAME VARCHAR(100))");
@@ -60,25 +63,23 @@ public class MyDBConnection {
                 + "DATAIZ DATE)");
 
             // Insert initial data only if tables are empty
-            ResultSet rs = st.executeQuery("SELECT COUNT(*) FROM KATEGORII");
-            rs.next();
-            if (rs.getInt(1) == 0) {
-                st.executeUpdate("INSERT INTO KATEGORII(NAME) VALUES('Nvidia Jetson Nano')");
-                st.executeUpdate("INSERT INTO KATEGORII(NAME) VALUES('512GB Hard Disc')");
-                st.executeUpdate("INSERT INTO KATEGORII(NAME) VALUES('Cases for the box')");
+            try (ResultSet rs = st.executeQuery("SELECT COUNT(*) FROM KATEGORII")) {
+                rs.next();
+                if (rs.getInt(1) == 0) {
+                    st.executeUpdate("INSERT INTO KATEGORII(NAME) VALUES('Nvidia Jetson Nano')");
+                    st.executeUpdate("INSERT INTO KATEGORII(NAME) VALUES('512GB Hard Disc')");
+                    st.executeUpdate("INSERT INTO KATEGORII(NAME) VALUES('Cases for the box')");
+                }
             }
 
-            rs = st.executeQuery("SELECT COUNT(*) FROM DOSTAVCHICI");
-            rs.next();
-            if (rs.getInt(1) == 0) {
-                st.executeUpdate("INSERT INTO DOSTAVCHICI(NAME, ADRES) VALUES('AliExpress', 'China')");
-                st.executeUpdate("INSERT INTO DOSTAVCHICI(NAME, ADRES) VALUES('Mouser', 'USA')");
-                st.executeUpdate("INSERT INTO DOSTAVCHICI(NAME, ADRES) VALUES('Farnell', 'UK')");
+            try (ResultSet rs = st.executeQuery("SELECT COUNT(*) FROM DOSTAVCHICI")) {
+                rs.next();
+                if (rs.getInt(1) == 0) {
+                    st.executeUpdate("INSERT INTO DOSTAVCHICI(NAME, ADRES) VALUES('AliExpress', 'China')");
+                    st.executeUpdate("INSERT INTO DOSTAVCHICI(NAME, ADRES) VALUES('Mouser', 'USA')");
+                    st.executeUpdate("INSERT INTO DOSTAVCHICI(NAME, ADRES) VALUES('Farnell', 'UK')");
+                }
             }
-
-            st.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 }
